@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using eShop.Common.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 
 namespace eShop.Catalog.Api.Controllers
@@ -12,10 +9,10 @@ namespace eShop.Catalog.Api.Controllers
     [Route("api/v{version:apiVersion}/[controller]")]
     public class RootController : ControllerBase
     {
-        protected readonly ILogger<RootController> _logger;
-        public RootController(ILogger<RootController> logger)
+        protected readonly ILoggerManager _logger;
+        public RootController(ILoggerManager logger)
         {
-            _logger = logger;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
     }
 }

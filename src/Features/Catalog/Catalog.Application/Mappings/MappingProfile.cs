@@ -8,8 +8,8 @@ namespace eShop.Catalog.Application.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<ProductDto, Product>().ReverseMap();
             CreateMap<Product, ProductDto>();
+            CreateMap<ProductDto, Product>().ReverseMap();
         }
     }
 }

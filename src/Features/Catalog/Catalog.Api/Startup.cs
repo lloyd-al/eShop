@@ -18,6 +18,7 @@ using eShop.Catalog.Core.Interfaces;
 using Microsoft.Extensions.Options;
 using eShop.Catalog.Infrastructure.DataContexts;
 using eShop.Catalog.Infrastructure.Repositories;
+using eShop.Catalog.Application;
 
 namespace Catalog.Api
 {
@@ -33,12 +34,13 @@ namespace Catalog.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplicationLayer();
             services.ConfigureApiVersioning();
             services.ConfigureSwagger();
             services.ConfigureLoggerService();
             services.ConfigureMailService();
-            services.AddAutoMapper(typeof(Startup));
             services.ConfigureDatabase(Configuration);
+
             services.AddControllers();
             
         }

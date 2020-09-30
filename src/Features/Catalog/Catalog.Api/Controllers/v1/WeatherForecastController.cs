@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using eShop.Common.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+
 
 namespace eShop.Catalog.Api.Controllers.v1
 {
@@ -16,7 +16,7 @@ namespace eShop.Catalog.Api.Controllers.v1
         };
 
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger) : base(logger)
+        public WeatherForecastController(ILoggerManager logger) : base(logger)
         {
         }
 

@@ -13,11 +13,7 @@ namespace eShop.Catalog.Infrastructure
     {
         public static void ConfigureDatabase(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<CatalogDatabaseSetting>(
-                options =>
-                {
-                    options.ConnectionString = configuration.GetSection(nameof(CatalogDatabaseSetting)).Value;
-                });
+            services.Configure<CatalogDatabaseSetting>(x => configuration.GetSection(nameof(CatalogDatabaseSetting)).Bind(x));
 
             services.AddSingleton<ICatalogDatabaseSetting>(sp => sp.GetRequiredService<IOptions<CatalogDatabaseSetting>>().Value);
 
