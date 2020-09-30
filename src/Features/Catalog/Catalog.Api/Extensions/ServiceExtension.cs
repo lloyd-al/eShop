@@ -62,5 +62,7 @@ namespace eShop.Catalog.Api.Extensions
 
         public static void ConfigureMailService(this IServiceCollection services) =>
             services.AddTransient<IEmailService, EmailService>();
+
+
     }
 }

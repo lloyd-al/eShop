@@ -7,49 +7,48 @@ using eShop.Catalog.Core.Entities;
 using eShop.Catalog.Core.Interfaces;
 using eShop.Common.Core.Interfaces;
 using eShop.Common.Infrastructure.DataContexts;
+using System;
 
 namespace eShop.Catalog.Infrastructure.DataContexts
 {
-    public class CatalogDbContext : ApplicationDbContext, ICatalogDbContext
+    public class CatalogDbContext : ICatalogDbContext
     {
-        private readonly IDateTimeService _dateTime;
+        
 
-        public CatalogDbContext(DbContextOptions<CatalogDbContext> options, ICatalogDatabaseSetting settings, IDateTimeService dateTime) : base(options)
+        public CatalogDbContext(ICatalogDatabaseSetting settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
             Products = database.GetCollection<Product>(settings.CollectionName);
-
-            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-            _dateTime = dateTime;
+            CatalogDbContextSeed.SeedData(Products);
         }
 
 
         public IMongoCollection<Product> Products { get; }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            foreach (var entry in ChangeTracker.Entries<BaseEntity>())
-            {
-                switch (entry.State)
-                {
-                    case EntityState.Added:
-                        entry.Entity.Created = _dateTime.NowUtc;
-                        entry.Entity.LastModified = _dateTime.NowUtc;
-                        break;
-                    case EntityState.Modified:
-                        entry.Entity.LastModified = _dateTime.NowUtc;
-                        break;
-                }
-            }
-            return base.SaveChangesAsync(cancellationToken);
-        }
+        //public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        //{
+        //    foreach (var entry in ChangeTracker.Entries<BaseEntity>())
+        //    {
+        //        switch (entry.State)
+        //        {
+        //            case EntityState.Added:
+        //                entry.Entity.Created = DateTime.UtcNow;
+        //                entry.Entity.LastModified = DateTime.UtcNow;
+        //                break;
+        //            case EntityState.Modified:
+        //                entry.Entity.LastModified = DateTime.UtcNow;
+        //                break;
+        //        }
+        //    }
+        //    return base.SaveChangesAsync(cancellationToken);
+        //}
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            CatalogDbContextSeed.SeedData(Products);
-            base.OnModelCreating(builder);
-        }
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+            
+        //    base.OnModelCreating(builder);
+        //}
     }
 }

@@ -13,7 +13,11 @@ using Microsoft.Extensions.Logging;
 using AutoMapper;
 using eShop.Catalog.Api.Extensions;
 using eShop.Catalog.Infrastructure;
-
+using eShop.Catalog.Infrastructure.Settings;
+using eShop.Catalog.Core.Interfaces;
+using Microsoft.Extensions.Options;
+using eShop.Catalog.Infrastructure.DataContexts;
+using eShop.Catalog.Infrastructure.Repositories;
 
 namespace Catalog.Api
 {
@@ -34,7 +38,7 @@ namespace Catalog.Api
             services.ConfigureLoggerService();
             services.ConfigureMailService();
             services.AddAutoMapper(typeof(Startup));
-            //services.ConfigureDatabase(Configuration);
+            services.ConfigureDatabase(Configuration);
             services.AddControllers();
             
         }

@@ -23,7 +23,6 @@ namespace eShop.Catalog.Infrastructure
 
             services.AddTransient<ICatalogDbContext, CatalogDbContext>();
             services.AddTransient<IProductRepository, ProductRepository>();
-            //services.AddTransient<IRepositoryManager, RepositoryManager>();
         }
     }
 }
