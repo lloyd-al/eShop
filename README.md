@@ -23,6 +23,15 @@ mongo                                    - name of the image to run;
 
 ` mongo --host localhost -u mongoadmin -p secret --authenticationDatabase admin `
 
+## Redis Set-up
+
+` docker pull redis `
+
+` docker run -d --name eshop-redis -p 6379:6379 redis `
+
+` docker exec -it eshop-redis /bin/bash `
+
+` redis-cli `
 
 #
 Following packages need to be installed in each project
