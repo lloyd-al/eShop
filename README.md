@@ -77,6 +77,7 @@ Following packages need to be installed in each project
 
 >Install-Package MongoDB.Driver
 
+>Install-Package Microsoft.Extensions.Configuration
 
 #
 **Features/Catalog.Application**
@@ -98,9 +99,7 @@ Following packages need to be installed in each project
 
 **Features/Basket.Core**
 
->Install-Package 
->
->Install-Package 
+>Install-Package StackExchange.Redis
 
 
 #
@@ -108,7 +107,13 @@ Following packages need to be installed in each project
 
 >Install-Package Microsoft.EntityFrameworkCore
 
->Install-Package MongoDB.Driver
+>Install-Package Microsoft.Extensions.Configuration
+
+>Install-Package Microsoft.Extensions.Options
+
+>Install-Package Newtonsoft.Json
+
+>Install-Package StackExchange.Redis
 
 
 #
