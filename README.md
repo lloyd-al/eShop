@@ -2,7 +2,6 @@
 Build e-commerce application based on microservice architecture, clean code architecture. 
 Building Microservices using Asp.Net Web API, Docker, RabbitMQ, Ocelot API Gateway, MongoDB, Redis, SqlServer
 
-
 ## MongoDB Set-up
 
 
@@ -24,9 +23,21 @@ mongo                                    - name of the image to run;
 
 ` mongo --host localhost -u mongoadmin -p secret --authenticationDatabase admin `
 
+## Redis Set-up
+
+` docker pull redis `
+
+` docker run -d --name eshop-redis -p 6379:6379 redis `
+
+` docker exec -it eshop-redis /bin/bash `
+
+` redis-cli `
 
 #
 Following packages need to be installed in each project
+
+
+## Common Services for the enitre project
 
 **Common.Core**
 
@@ -43,7 +54,15 @@ Following packages need to be installed in each project
 
 >Install-Package NLog
 
-#
+>Install-Package Microsoft.AspNetCore.Mvc.Versioning
+
+>Install-Package Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer
+
+>Install-Package Microsoft.AspNetCore.Mvc.ApiExplorer
+
+
+## Catalog Project
+
 **Features/Catalog.Core**
 
 >Install-Package MongoDB.Driver
@@ -58,6 +77,7 @@ Following packages need to be installed in each project
 
 >Install-Package MongoDB.Driver
 
+>Install-Package Microsoft.Extensions.Configuration
 
 #
 **Features/Catalog.Application**
@@ -73,3 +93,41 @@ Following packages need to be installed in each project
 >Install-Package NLog.Config
 
 >Install-Package Microsoft.AspNetCore.Mvc.Versioning
+
+
+## Basket Project
+
+**Features/Basket.Core**
+
+>Install-Package StackExchange.Redis
+
+
+#
+**Features/Basket.Infrastructure**
+
+>Install-Package Microsoft.EntityFrameworkCore
+
+>Install-Package Microsoft.Extensions.Configuration
+
+>Install-Package Microsoft.Extensions.Options
+
+>Install-Package Newtonsoft.Json
+
+>Install-Package StackExchange.Redis
+
+
+#
+**Features/Basket.Application**
+
+>Install-Package AutoMapper.Extensions.Microsoft.DependencyInjection
+
+
+#
+**Features/Basket.API**
+
+>Install-Package Swashbuckle.AspNetCore
+
+>Install-Package NLog.Config
+
+>Install-Package Microsoft.AspNetCore.Mvc.Versioning
+
