@@ -8,17 +8,11 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
-using AutoMapper;
-using eShop.Catalog.Api.Extensions;
 using eShop.Catalog.Infrastructure;
-using eShop.Catalog.Infrastructure.Settings;
-using eShop.Catalog.Core.Interfaces;
-using Microsoft.Extensions.Options;
-using eShop.Catalog.Infrastructure.DataContexts;
-using eShop.Catalog.Infrastructure.Repositories;
 using eShop.Catalog.Application;
+using eShop.Common.Infrastructure.Extensions;
+using eShop.Catalog.Api.Extensions;
 
 namespace Catalog.Api
 {
@@ -35,10 +29,7 @@ namespace Catalog.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationLayer();
-            services.ConfigureApiVersioning();
-            services.ConfigureSwagger();
-            services.ConfigureLoggerService();
-            services.ConfigureMailService();
+            services.ConfigureExtensions();
             services.ConfigureDatabase(Configuration);
 
             services.AddControllers();
