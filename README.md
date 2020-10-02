@@ -18,10 +18,10 @@ Building Microservices using Asp.Net Web API, Docker, RabbitMQ, Ocelot API Gatew
 mongo                                    - name of the image to run;
 ```
 
-
 ` docker exec -it mongodb bash `
 
 ` mongo --host localhost -u mongoadmin -p secret --authenticationDatabase admin `
+
 
 ## Redis Set-up
 
@@ -32,6 +32,16 @@ mongo                                    - name of the image to run;
 ` docker exec -it eshop-redis /bin/bash `
 
 ` redis-cli `
+
+
+## RabbitMQ Set-up
+
+` docker pull rabbitmq `
+
+` docker run -d --hostname local-rabbit --name eshop-rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management `
+
+` http://localhost:15672 (guest/guest) `
+
 
 #
 Following packages need to be installed in each project
@@ -59,6 +69,13 @@ Following packages need to be installed in each project
 >Install-Package Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer
 
 >Install-Package Microsoft.AspNetCore.Mvc.ApiExplorer
+
+#
+**Common.EventBusRabbitMQ**
+
+>Install-Package RabbitMQ.Client
+
+>Install-Package Newtonsoft.Json
 
 
 ## Catalog Project
@@ -130,4 +147,7 @@ Following packages need to be installed in each project
 >Install-Package NLog.Config
 
 >Install-Package Microsoft.AspNetCore.Mvc.Versioning
+
+>Install-Package AutoMapper.Extensions.Microsoft.DependencyInjection
+
 
