@@ -43,6 +43,17 @@ mongo                                    - name of the image to run;
 ` http://localhost:15672 (guest/guest) `
 
 
+## SQL Server Set-up
+
+` docker pull mcr.microsoft.com/mssql/server `
+
+` docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=password@1234" -p 2433:1433 --name sqlserverdb -d mcr.microsoft.com/mssql/server `
+
+` docker ps -a `
+
+` docker exec -it sqlserverdb /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'password@1234' `
+
+
 #
 Following packages need to be installed in each project
 
@@ -80,7 +91,7 @@ Following packages need to be installed in each project
 
 ## Catalog Project
 
-**Features/Catalog.Core**
+**Features/Catalog/Catalog.Core**
 
 >Install-Package MongoDB.Driver
 >
@@ -88,7 +99,7 @@ Following packages need to be installed in each project
 
 
 #
-**Features/Catalog.Infrastructure**
+**Features/Catalog/Catalog.Infrastructure**
 
 >Install-Package Microsoft.EntityFrameworkCore
 
@@ -97,13 +108,13 @@ Following packages need to be installed in each project
 >Install-Package Microsoft.Extensions.Configuration
 
 #
-**Features/Catalog.Application**
+**Features/Catalog/Catalog.Application**
 
 >Install-Package AutoMapper.Extensions.Microsoft.DependencyInjection
 
 
 #
-**Features/Catalog.API**
+**Features/Catalog/Catalog.API**
 
 >Install-Package Swashbuckle.AspNetCore
 
@@ -114,13 +125,13 @@ Following packages need to be installed in each project
 
 ## Basket Project
 
-**Features/Basket.Core**
+**Features/Basket/Basket.Core**
 
 >Install-Package StackExchange.Redis
 
 
 #
-**Features/Basket.Infrastructure**
+**Features/Basket/Basket.Infrastructure**
 
 >Install-Package Microsoft.EntityFrameworkCore
 
@@ -134,13 +145,54 @@ Following packages need to be installed in each project
 
 
 #
-**Features/Basket.Application**
+**Features/Basket/Basket.Application**
 
 >Install-Package AutoMapper.Extensions.Microsoft.DependencyInjection
 
 
 #
-**Features/Basket.API**
+**Features/Basket/Basket.API**
+
+>Install-Package Swashbuckle.AspNetCore
+
+>Install-Package NLog.Config
+
+>Install-Package Microsoft.AspNetCore.Mvc.Versioning
+
+>Install-Package AutoMapper.Extensions.Microsoft.DependencyInjection
+
+
+## Ordering Project
+
+**Features/Ordering/Ordering.Core**
+
+>Install-Package 
+
+
+#
+**Features/Ordering/Ordering.Infrastructure**
+
+>Install-Package Microsoft.EntityFrameworkCore
+
+>Install-Package Microsoft.EntityFrameworkCore.SqlServer
+
+>Install-Package Microsoft.EntityFrameworkCore.Tools
+
+>Install-Package Microsoft.Extensions.Configuration
+
+>Install-Package Microsoft.Extensions.Options
+
+>Install-Package Newtonsoft.Json
+
+
+#
+**Features/Ordering/Ordering.Application**
+
+>Install-Package AutoMapper.Extensions.Microsoft.DependencyInjection
+
+
+#
+**Features/Ordering/Ordering.API**
 
 >Install-Package Swashbuckle.AspNetCore
 
