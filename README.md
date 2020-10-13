@@ -184,9 +184,18 @@ Following packages need to be installed in each project
 
 >Install-Package Newtonsoft.Json
 
+` PM> add-migration InitialDB `
 
 #
 **Features/Ordering/Ordering.Application**
+
+>Install-Package AutoMapper
+
+>Install-Package MediatR
+
+>Install-Package FluentValidation
+
+>Install-Package MediatR.Extensions.Microsoft.DependencyInjection
 
 >Install-Package AutoMapper.Extensions.Microsoft.DependencyInjection
 
