@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
+using Microsoft.Extensions.Hosting;
+using AutoMapper;
 using eShop.Basket.Infrastructure;
 using eShop.Common.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -27,8 +28,10 @@ namespace Basket.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
             services.ConfigureExtensions();
             services.ConfigureDatabase(Configuration);
+            services.ConfigureRabbitMQ(Configuration);
             services.AddControllers();
         }
 

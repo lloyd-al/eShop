@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using eShop.Basket.Core.Entities;
 using eShop.Basket.Core.Interfaces;
 using eShop.Common.Core.Interfaces;
-
+using eShop.Common.EventBusRabbitMQ.Producer;
+using AutoMapper;
+using eShop.Common.EventBusRabbitMQ.Events;
+using eShop.Common.EventBusRabbitMQ.Common;
 
 namespace eShop.Basket.Api.Controllers.v1
 {
@@ -14,10 +17,14 @@ namespace eShop.Basket.Api.Controllers.v1
     public class BasketController : RootController
     {
         private readonly IBasketRepository _repository;
+        private readonly EventBusRabbitMQProducer _eventBus;
+        private readonly IMapper _mapper;
 
-        public BasketController(IBasketRepository repository, ILoggerManager logger) : base(logger)
+        public BasketController(IBasketRepository repository, EventBusRabbitMQProducer eventBus, IMapper mapper, ILoggerManager logger) : base(logger)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet]
@@ -70,7 +77,19 @@ namespace eShop.Basket.Api.Controllers.v1
             // ordering.api to convert basket to order and proceeds with
             // order creation process
 
+            var eventMessage = _mapper.Map<BasketCheckoutEvent>(basketCheckout);
+            eventMessage.RequestId = Guid.NewGuid();
+            eventMessage.TotalPrice = basket.TotalPrice;
 
+            try
+            {
+                _eventBus.PublishBasketCheckout(EventBusConstants.BasketCheckoutQueue, eventMessage);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("ERROR Publishing integration event: {eventMessage.RequestId} from {Basket}");
+                throw;
+            }
 
             return Accepted();
         }

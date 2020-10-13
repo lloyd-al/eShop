@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>eShop.Ordering.Core</AssemblyName>
+    <RootNamespace>eShop.Ordering.Core</RootNamespace>
+  </PropertyGroup>
+
+</Project>

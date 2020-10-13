@@ -10,6 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="NLog.Config" Version="4.7.5" />
@@ -17,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common.EventBusRabbitMQ\Common.EventBusRabbitMQ.csproj" />
     <ProjectReference Include="..\..\..\Common.Infrastructure\Common.Infrastructure.csproj" />
     <ProjectReference Include="..\Basket.Application\Basket.Application.csproj" />
     <ProjectReference Include="..\Basket.Infrastructure\Basket.Infrastructure.csproj" />
